@@ -1,7 +1,5 @@
 package com.tweterooapi.api.models;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-
 import com.tweterooapi.api.dtos.UserDTO;
 
 import jakarta.persistence.Column;

@@ -1,11 +1,9 @@
 package com.tweterooapi.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.tweterooapi.api.dtos.TweetsDTO;
 import com.tweterooapi.api.models.TweetsModel;
@@ -13,7 +11,6 @@ import com.tweterooapi.api.models.UserModel;
 import com.tweterooapi.api.repositories.TweetsRepository;
 import com.tweterooapi.api.repositories.UserRepository;
 
-import jakarta.validation.Valid;
 
 @Service
 public class TweetsService {
@@ -33,6 +30,14 @@ public class TweetsService {
 
         TweetsModel tweet = new TweetsModel(dto, user.get());
         return Optional.of(tweetsRepository.save(tweet));
+    }
+
+    public List<TweetsModel> findAll(){
+        return tweetsRepository.findAll();
+    }
+
+    public List<TweetsModel> findTweetsByUserid(Long userId){
+        return tweetsRepository.findTweetsByUserid(userId);
     }
   
 
