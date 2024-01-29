@@ -1,5 +1,9 @@
 package com.tweterooapi.api.models;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
+import com.tweterooapi.api.dtos.UserDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +20,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 public class UserModel {
+
+    public UserModel(UserDTO dto) {
+        this.username = dto.getUsername();
+        this.avatar = dto.getAvatar();
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
