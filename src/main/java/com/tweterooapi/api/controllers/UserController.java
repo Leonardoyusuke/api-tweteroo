@@ -12,6 +12,9 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,9 +31,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserModel> createUser(@RequestBody @Valid UserDTO body){
-        // retornar status 201 (created) com id,username e avatar
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(body));
+    public ResponseEntity<Object> createUser(@RequestBody @Valid UserDTO body){
+        Optional<UserModel> user = userService.save(body);
+        if(user.isEmpty()){
+           return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
 }

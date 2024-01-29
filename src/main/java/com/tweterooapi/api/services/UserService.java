@@ -1,6 +1,5 @@
 package com.tweterooapi.api.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -18,9 +17,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserModel save(UserDTO dto){
+    public Optional <UserModel> save(UserDTO dto){
+        userRepository.existsByUsername(dto.getUsername());
+        if(userRepository.existsByUsername(dto.getUsername())){
+            return Optional.empty();
+        }
         UserModel user = new UserModel(dto);
-        return userRepository.save(user);
+        return Optional.of(userRepository.save(user));
         
     }
 

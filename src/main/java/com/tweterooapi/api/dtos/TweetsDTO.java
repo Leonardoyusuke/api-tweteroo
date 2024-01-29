@@ -1,6 +1,7 @@
 package com.tweterooapi.api.dtos;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -11,9 +12,7 @@ public class TweetsDTO {
     @Size(max = 280)
     private String tweet;
 
-    @NotBlank
-    private String username;
-    
-    @NotBlank
-    private String avatar;
+    @NotNull
+    private Long userId;
+ 
 }
